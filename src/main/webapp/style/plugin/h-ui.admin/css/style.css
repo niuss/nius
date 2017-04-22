@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+.choosePic{
+	position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #3bb4f2;
+    padding: 4px 12px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+a.choosePic:hover{
+	position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #3bb4f2;
+    padding: 4px 12px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    text-decoration: none;
+}

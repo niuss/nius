@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.auxing.system.dao.UserDao">
+	<resultMap id="UserMap" type="com.auxing.system.entity.account.User">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="email" property="email" jdbcType="VARCHAR"/>
+		<result column="password" property="loginPwd" jdbcType="VARCHAR"/>
+		<result column="phone" property="phone" jdbcType="VARCHAR"/>
+		<result column="position" property="position" jdbcType="VARCHAR"/>
+		<result column="address" property="address" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="INTEGER"/>
+		<result column="user_creater" property="user_creater" jdbcType="INTEGER"/>
+		<result column="user_mender" property="user_mender" jdbcType="INTEGER"/>
+		<result column="sex" property="sex" jdbcType="INTEGER"/>
+		<result column="e_number" property="e_number" jdbcType="INTEGER"/>
+		<result column="job_status" property="job_status" jdbcType="INTEGER"/>
+		
+		<collection property="roles" ofType="com.auxing.system.entity.account.Role">
+			<id column="r_id" property="r_id" jdbcType="BIGINT" />
+			<result column="r_name" property="r_name" jdbcType="VARCHAR"/>
+		</collection>
+	</resultMap>
+	<resultMap type="com.auxing.system.entity.department.Department" id="DepartmentMap">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="dep_name" property="dep_name" jdbcType="VARCHAR"/>
+		<result column="dep_desc" property="dep_desc" jdbcType="VARCHAR"/>
+		<result column="dep_status" property="dep_status" jdbcType="INTEGER"/>
+		<result column="dep_createtime" property="dep_createtime" jdbcType="DATE"/>
+		<result column="dep_mender" property="dep_mender" jdbcType="INTEGER"/>
+	</resultMap>
+
+	
+
+	<sql id="User_Column_List" >
+    	u.id,u.name,u.username,u.password,r.r_id,r.r_name
+  	</sql>
+
+ 	<select id="findUserByLoginName" parameterType="com.auxing.system.entity.account.User" resultMap="UserMap">
+		SELECT a.id,a.name,a.username,a.password FROM user a WHERE a.username = #{username,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
+	</select>
+	
+	 <select id="finAll" resultMap="UserMap">
+	 select 
+	 	<include refid="User_Column_List" />
+	 	from user u left outer join user_role ur 
+	 	on u.id = ur.user_id left outer join role r 
+	 	on ur.role_id = r.r_id 
+	</select>
+</mapper> 
