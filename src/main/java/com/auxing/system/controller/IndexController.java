@@ -12,7 +12,7 @@ public class IndexController {
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	String index(Model model){
-		System.out.println("第一次修改");
+		System.out.println("第er次修改");
 		return "index";
 	}
 }
